@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 #define INF 987654321
 
@@ -46,19 +47,24 @@ int main() {
 			if (nxt[r][c] == 0)
 				cout << 0 << '\n';
 			else {
-				int cnt = 1;
+				vector<int> route;
 				int start = r;
-				int end = c;
-				int route[101] = { start,};
-				while (nxt[start][end] != end) {
-					route[cnt++] = nxt[start][end];
-					start = nxt[start][end];
+				while (start != c) {
+					route.push_back(start);
+					start = nxt[start][c];
 				}
-				route[cnt++] = end;
-				cout << cnt << ' ';
-				for (int i = 0; i < cnt; i++)
+				route.push_back(c);
+
+				cout << route.size() << ' ';
+
+				for (auto x : route)
+					cout << x << ' ';
+				/*
+				* 바로 위 코드가 쉬운 방법
+				for (int i = 0; i < route.size(); i++)
 					cout << route[i] << ' ';
-				cout << '\n';
+
+				*/cout << '\n';
 			}
 		}
 
